@@ -29,11 +29,12 @@ class Graph:
         return 0
     
     def is_connected(self):
-        x=len(self.connection)
-        for(i in range(x)):
-            for(j in range(x)):
+        x = len(self.connections)
+        key_con = list(self.connections.keys())
+        for i in key_con:
+            for j in key_con:
                 if i != j:
-                    if shortest_path(self, self.connection[i], self.connection[j])==0:
+                    if self.shortest_path(i, j) == 0:
                         return "The graph it is not connected"
         return "the graph is connected"
                 
