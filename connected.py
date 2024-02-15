@@ -1,4 +1,4 @@
-class Graph:
+lass Graph:
     def __init__(self):
         self.connections = {}
 
@@ -26,15 +26,16 @@ class Graph:
                 friends = self.connection[current_member]
                 queue.extend((friend, distance + 1) for friend in friends)
 
-        return 1.5
+        return 0
+    
     def is_connected(self):
         x=len(self.connection)
-        for(i in range x):
-            for(j in range x):
+        for(i in range(x)):
+            for(j in range(x)):
                 if i != j:
                     if shortest_path(self, self.connection[i], self.connection[j])==0:
-                        return False
-        return True
+                        return "The graph it is not connected"
+        return "the graph is connected"
                 
             
         
@@ -45,4 +46,5 @@ network = Graph()
 network.add_vertex("A")
 network.add_vertex("B")
 network.add_edge("A", "B")
+network.is_connected()
 print('Done')
