@@ -34,7 +34,7 @@ class Graph:
                 friends = self.relations[current_member]
                 queue.extend((friend, distance + 1) for friend in friends)
 
-        return float('inf')  # Return infinity if no path is found
+        return 0
 
 
 network = Graph()
