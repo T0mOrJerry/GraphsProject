@@ -13,16 +13,13 @@ class Graph:
             self.connections[node2].append(node1)
 
     def going_through(self, stack, visited):
-        if stack:
+        while stack:
             node = stack.pop(0)
             for i in self.connections[node]:
                 if i not in visited:
                     stack.append(i)
             visited.append(node)
-            self.going_through(stack, visited)
-            return visited
-        else:
-            return visited
+        return visited
 
 
 
