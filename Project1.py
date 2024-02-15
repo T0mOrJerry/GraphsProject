@@ -4,7 +4,7 @@ class Graph:
         self.relations = {}
 
     def add_member(self, name, age=None, location=None):
-        self.people[name] = [age, location]
+        self.people[name] = [age, location, 0]
         self.relations[name] = []
 
     def add_relationship(self, name1, name2):
@@ -12,7 +12,9 @@ class Graph:
             print('ERROR: A person is not in the network')
         else:
             self.relations[name1].append(name2)
+            self.people[name1][2] += 1
             self.relations[name2].append(name1)
+            self.people[name2][2] += 1
 
     def find_friends(self, name):
         return self.relations[name]
