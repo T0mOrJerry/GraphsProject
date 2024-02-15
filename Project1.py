@@ -19,6 +19,19 @@ class Graph:
     def find_friends(self, name):
         return self.relations[name]
 
+    def shortest_path(self, start, end):
+        visited = set()
+        queue = [(start, 0)]
+        while queue:
+            current_member, distance = queue.pop(0)
+            if current_member == end:
+                return distance
+            if current_member not in visited:
+                visited.add(current_member)
+                friends = self.relations[current_member]
+                queue.extend((friend, distance + 1) for friend in friends)
+        return 0
+
 
 network = Graph()
 # Add some members to the network
@@ -31,4 +44,8 @@ network.add_relationship("Alice", "Bob")
 network.add_relationship("Bob", "Charlie")
 network.add_relationship("Charlie", "David")
 alice_friends = network.find_friends("Alice")
-print(alice_friends) # Output: ["Bob"]
+print(alice_friends)  # Output: ["Bob"]
+
+# Find the shortest path of each member
+shortest_path = network.shortest_path("Alice", "David")
+print(shortest_path)  # Output: 3
