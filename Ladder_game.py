@@ -2,7 +2,7 @@ with open("words_alpha.txt") as file:
     DATA = [i.strip() for i in file.readlines()]
 
 
-def find_neighbors(root):
+def find_neighbors(base, words):
     pass
 
 
@@ -10,7 +10,7 @@ def create_graph(root):
     li = list(filter(lambda x: len(x) == len(root), DATA))
     res = {}
     for i in li:
-        res[i] = find_neighbors(root)
+        res[i] = find_neighbors(root, li)
     return res
 
 
