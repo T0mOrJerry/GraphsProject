@@ -3,14 +3,24 @@ with open("words_alpha.txt") as file:
 
 
 def find_neighbors(base, words):
-    pass
+    neighbors = []
+    for a in words:
+        counter_of_difference = 0
+        for i in range(len(a)):
+            if base[i] != a[i]:
+                counter_of_difference += 1
+            if counter_of_difference == 2:
+                break
+        if counter_of_difference == 1:
+            neighbors.append(a)
+    return neighbors
 
 
 def create_graph(root):
     li = list(filter(lambda x: len(x) == len(root), DATA))
     res = {}
     for i in li:
-        res[i] = find_neighbors(root, li)
+        res[i] = find_neighbors(i, li)
     return res
 
 
@@ -24,6 +34,7 @@ while mainloop:
         print('For my best knowledge one of this words doesnt exists. try again!')
     else:
         graph = create_graph(start_word)
+        success = False
         visited = set()
         queue = [(start_word, 0, f'{start_word}')]
         while queue:
@@ -31,9 +42,12 @@ while mainloop:
             if current_member == target_word:
                 print(distance)
                 print(path)
+                success = True
                 break
             if current_member not in visited:
                 visited.add(current_member)
                 neighbors = graph[current_member]
                 queue.extend((neighbor, distance + 1, path + ' ' + neighbor) for neighbor in neighbors)
-        print(0)
+        mainloop = False
+        if not success:
+            print('There is no path')
